@@ -1,0 +1,24 @@
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework import routers, serializers, viewsets, permissions
+
+from .models import Video
+
+
+class VideoSerializer(serializers.HyperLinkedModelSerializer):
+	class Meta:
+		model = Video
+		fields = [
+			'id',
+			'slug',
+			'title',
+			'order',
+			'embed_code',
+			'share_message',
+			'timestamp',
+		]
+
+
+
+class VideoViewSet(viewsets.ModelViewSet):
+	queryset = Video.objects.all()
+	serializer_class = VideoSerializer
