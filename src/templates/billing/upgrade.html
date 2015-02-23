@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+<script>
+{% block jquery %}
+
+braintree.setup("{{ client_token }}", "dropin", {
+	container: "checkout",
+	form: "checkoutForm"
+});
+
+$("#submitPayment").on("click", function(){
+	var btn = $(this).button("loading")
+	setTimeout(function(){
+		btn.button('reset');
+	}, 3500)
+});
+
+{% endblock %}
+</script>
+
+{% block content %}
+<div class='row'>
+<div class='col-sm-12' style='text-align:center;'>
+
+<h1>Upgrade your account!</h1>
+<p class='lead'>For $25/month get unlimited access</p>
+
+</div>
+</div>
+<div class='row'>
+<hr/>
+<div class='col-sm-4 col-sm-offset-4'>
+<form id='checkoutForm' method='POST' action=".">{% csrf_token %}
+
+<div id='checkout' style='min-height: 350px;'></div>
+
+<input id='submitPayment' type='submit' data-loading-text="Completing..." class='btn btn-default btn-block' value='Complete upgrade' autocomplete="off" />
+</form>
+</div>
+</div>
+{% endblock %}

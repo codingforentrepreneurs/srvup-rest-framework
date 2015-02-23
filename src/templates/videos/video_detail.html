@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% endblock %}
+
+<style>
+{% block style %}
+.reply_comment {
+	display: none;
+}
+
+{% endblock %}
+</style>
+
+
+<script>
+{% block jquery %}
+
+
+function update_iframe_size(){
+	var parent_id = $("iframe").parent().attr("id");
+	if (parent_id == "main_video") {
+		var parent_class = $("iframe").parent().attr("class");
+		var parent_width = $("iframe").parent().width();
+		console.log(parent_class);
+		var width = $("iframe").css("width"); // $("iframe").width();
+		var height = $("iframe").css("height");
+		var ratio = parseInt(height)/parseInt(width);
+		var new_height = parseInt(parent_width) * ratio
+		$("iframe").css("width", parent_width);
+		$("iframe").css("height", new_height);
+	}
+}
+
+update_iframe_size()
+$(window).bind("resize", function(){
+	// alert("reized");
+	update_iframe_size();
+});
+
+
+$('.reply_btn').click(function(e){
+	e.preventDefault();
+	$(this).next(".reply_comment").fadeToggle();
+	// $(".reply_comment").fadeToggle();
+})
+
+
+
+{% endblock %}
+</script>
+
+
+
+
+{% block content %}
+<div class='row'>
+<div class='col-sm-8'>
+<h1>{{ obj.title }}</h1>
+
+</div>
+
+<div class='col-sm-4' style='text-align:right;'>
+
+{% if obj.get_previous_url %}
+<a href='{{ obj.get_previous_url }}'><i class="fa fa-3x fa-arrow-circle-o-left"></i></a>
+{% endif %}
+{% if obj.get_next_url %}	
+<a href='{{ obj.get_next_url }}'><i class="fa fa-3x fa-arrow-circle-o-right"></i></a>
+{% endif %}
+
+
+
+<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ obj.get_share_link }}"><i class="fa fa-facebook-square fa-3x"></i></a>
+
+
+<a target="_blank" href="https://twitter.com/home?status={{ obj.get_share_message|safe }}"><i class="fa fa-twitter-square fa-3x"></i></a>
+
+<a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ obj.get_share_link }}&title={{ obj.get_share_message|safe }}&summary={{ obj.get_share_message|safe }}&source={{ obj.get_share_link }}">
+<i class="fa fa-linkedin-square fa-3x"></i>
+</a>
+</div>
+
+
+<div class='col-sm-12'>
+<hr/>
+</div>
+
+</div>
+<div class='col-sm-12' id='main_video'>
+{{ obj.embed_code|safe }}
+
+</div>
+
+{% if obj.tags.all %}
+<div class='col-sm-12'>
+<ul>
+{% for tag in obj.tags.all %}
+<li>{{ tag }}</li>
+{% endfor %}
+<ul>
+</div>
+{% endif %}
+
+<br/>
+
+
+
+<br/>
+<hr/>
+
+<div class='row'>
+<div class='col-sm-12'>
+<h1>Comments/Questions</h1>
+<form method="POST" action='{% url "comment_create" %}'>{% csrf_token %}
+<input type='hidden' name='video_id' value='{{ obj.id }}'/>
+<input type='hidden' name='origin_path' value='{{ request.get_full_path }}'/>
+
+{% crispy comment_form comment_form.helper %}
+</form>
+
+
+<br/>
+<br/>
+<table class='table'>
+
+{% for comment in comments %}
+
+<tr><td>{{ comment.get_comment }} 
+<br/><small>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago </small>
+				{% if not comment.is_child %}
+				<ul>
+				{% for child in comment.get_children %}
+				<li>{{ child.get_comment }} 
+				<small>via {{ child.user }}</small>
+
+
+				</li>
+				{% endfor %}
+				</ul>
+				<a href='{{ comment.get_absolute_url }}'>View Thread</a> | <a href='#' class='reply_btn'>Reply</a>
+				<div class='reply_comment'>
+				<form method="POST" action='{% url "comment_create" %}'>{% csrf_token %}
+				<input type='hidden' name='video_id' value='{% url "comment_create" %}'/>
+				<input type='hidden' name='origin_path' value='{{ comment.get_origin }}'/>
+				<input type='hidden' name='parent_id' value='{{ comment.id }}' />
+				{% crispy comment_form comment_form.helper %}
+				
+				</form>
+				</div>
+				{% endif %}
+
+
+</td></tr>
+
+{% endfor %}
+
+</table>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

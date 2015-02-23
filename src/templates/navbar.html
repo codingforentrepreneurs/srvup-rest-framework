@@ -1,0 +1,38 @@
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">srvup</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'projects' %}">Categories</a>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+           
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle notification-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class='glyphicon glyphicon-inbox' aria-hidden="true"></span> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu" id='notification_dropdown'>
+              </ul>
+            </li>
+              <li><a href="{% url 'account_home' %}">Account</a></li>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+                    {% if request.get_full_path == "/" %}
+                    {% else %}
+                    <li><a href="{% url 'register' %}">Join</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+        {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

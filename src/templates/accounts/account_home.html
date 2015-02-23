@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+<div class='row'>
+	<div class='col-sm-6 col-sm-offset-3'>
+	<h2>Account</h2>
+	<hr/>
+	</div>
+</div>
+
+<div class='row'>
+
+	<div class='col-sm-6 col-sm-offset-3'>
+		<h3>Notifications
+		 <small><a href='{% url "notifications_all" %}'>View All</a></small></h3>
+		<table class='table'>
+			{% for note in notifications %}
+
+
+			<tr><td>{{ note|safe }}</td><td>{% if note.read %} Read {% else %} Unread {% endif %}</td></tr>
+			{% endfor %}
+			</table>
+		
+	</div>
+</div>
+
+
+<div class='row'>
+	<div class='col-sm-6 col-sm-offset-3'>
+		<hr/>
+	<h3>Account Options</h3>
+	<p class='lead'>
+	{% if request.user.is_member %}
+		Account active until: <b>{{ request.user.membership.date_end }}</b>
+	{% endif %}
+
+	</p>
+	{% if request.user.is_member and request.user.usermerchantid.subscription_id %}
+
+
+		<a href='{% url "cancel_subscription" %}'>Cancel Membership</a>
+
+	{% elif not request.user.is_member %}
+
+	<a href='{% url "account_upgrade" %}'>Upgrade to Membership</a>
+
+	{% else %}
+
+
+
+	{% endif %}
+	</div>
+
+
+</div>
+
+<div class='row'>
+
+	<div class='col-sm-6 col-sm-offset-3'>
+		<hr/>
+		<h3>Recent Billing History <small>
+			<a href='{% url "billing_history" %}'>View All</a>
+			</small>
+			</h3>
+		<table class='table'>
+
+		<thead>
+		<th>Order #</th>
+		<th>Amount</th>
+		<th>Payment Method</th>
+		<th>Date</th>
+		</thead>
+		{% for object in transactions %}
+		<tr>
+		<td>{{ object.order_id }}</td>
+		<td>${{ object.amount }}</td>
+		<td>{{ object.card_type }}{% if object.last_four %}<br/>Last Four Digits: {{ object.last_four }}{% endif %}</td>
+		<td>{{ object.timestamp }}</td>
+
+		</tr>
+
+
+		{% endfor %}
+
+		</table>
+
+
+		
+	</div>
+</div>
+
+
+{% endblock %}
