@@ -4,7 +4,7 @@ from rest_framework import routers, serializers, viewsets, permissions
 from .models import Video
 
 
-class VideoSerializer(serializers.HyperLinkedModelSerializer):
+class VideoSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Video
 		fields = [

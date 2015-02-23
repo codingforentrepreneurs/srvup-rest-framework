@@ -5,6 +5,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
+from rest_framework import routers
+
+from videos.serializers import VideoViewSet
+
+router = routers.DefaultRouter()
+router.register(r"videos", VideoViewSet)
+
+
 urlpatterns = patterns('',
     # Examples:
     #url(r'^about/$', TemplateView.as_view(template_name='base.html'), name='home'),
@@ -15,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^projects/(?P<cat_slug>[\w-]+)/$', 'videos.views.category_detail', name='project_detail'),
     url(r'^projects/(?P<cat_slug>[\w-]+)/(?P<vid_slug>[\w-]+)/$', 'videos.views.video_detail', name='video_detail'),
     url(r'^dj/admin/', include(admin.site.urls)),
+    url(r'^api/', include(router.urls)),
 ) 
 
 if settings.DEBUG:
