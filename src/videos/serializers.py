@@ -5,14 +5,35 @@ from rest_framework import routers, serializers, viewsets, permissions
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
-from .models import Video, Category
+from .models import  Category, Video
+
+
+
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Category
+		fields = [
+			'id',
+			'slug',
+			'title',
+			'description',
+			'image',
+		]
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+	#authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
+	#permission_classes = [permissions.IsAuthenticated, ]
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
+
+
 
 
 class VideoSerializer(serializers.HyperlinkedModelSerializer):
-	# category_url = serializers.CharField(source='category.get_absolute_url', read_only=True)
 	category_title = serializers.CharField(source='category.title', read_only=True)
 	category_image = serializers.CharField(source='category.get_image_url', read_only=True)
-	category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+	#category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
 	class Meta:
 		model = Video
 		fields = [
@@ -26,7 +47,7 @@ class VideoSerializer(serializers.HyperlinkedModelSerializer):
 			"category",
 			"category_image",
 			"category_title",
-			# "category_url",
+			"comment_set",
 		]
 
 

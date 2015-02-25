@@ -7,9 +7,12 @@ from django.views.generic import TemplateView
 
 from rest_framework import routers
 
-from videos.serializers import VideoViewSet
+from comments.serializers import CommentViewSet
+from videos.serializers import CategoryViewSet, VideoViewSet
 
 router = routers.DefaultRouter()
+router.register(r"categories", CategoryViewSet)
+router.register(r"comments", CommentViewSet)
 router.register(r"videos", VideoViewSet)
 
 
