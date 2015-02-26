@@ -1,16 +1,31 @@
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
 from rest_framework import routers, serializers, viewsets, permissions
 
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.reverse import reverse
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from comments.serializers import CommentSerializer
 
 from .models import  Category, Video
 
+#HyperlinkedIdentityField
+
+class CategoryUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
+	#lookup_field = 'slug'
+	#pass
+
+	def get_url(self, obj, view_name, request, format):
+		kwargs = {
+			'slug': obj.slug
+		}
+		return reverse(view_name, kwargs=kwargs, request=request, format=format)
+
+
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
+	url = CategoryUrlHyperlinkedIdentityField(view_name='category_detail_api')
 	class Meta:
 		model = Category
 		fields = [
