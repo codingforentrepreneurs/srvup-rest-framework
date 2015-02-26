@@ -6,6 +6,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, Http404, HttpResponseRedirect, get_object_or_404
 
 # Create your views here.
+
+
+
+from rest_framework import generics, permissions
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+
 from analytics.signals import page_view
 from comments.forms import CommentForm
 from comments.models import Comment
@@ -13,6 +21,16 @@ from comments.models import Comment
 
 
 from .models import Video, Category, TaggedItem
+from .serializers import CategorySerializer
+
+
+class CategoryListAPIView(generics.ListAPIView):
+	authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
+	permission_classes = [permissions.IsAuthenticated, ]
+	paginate_by = 10
+	#pass
 
 
 #@login_required

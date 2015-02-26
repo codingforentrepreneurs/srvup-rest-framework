@@ -9,6 +9,7 @@ from rest_framework import routers
 
 from comments.serializers import CommentViewSet
 from videos.serializers import CategoryViewSet, VideoViewSet
+from videos.views import CategoryListAPIView
 
 router = routers.DefaultRouter()
 router.register(r"categories", CategoryViewSet)
@@ -17,6 +18,7 @@ router.register(r"videos", VideoViewSet)
 
 
 urlpatterns = patterns('',
+    url(r'^api2/projects/', CategoryListAPIView.as_view(), name='category_list_api'),
     # Examples:
     #url(r'^about/$', TemplateView.as_view(template_name='base.html'), name='home'),
     #url(r'^pricing/$', TemplateView.as_view(template_name='base.html'), name='home'),

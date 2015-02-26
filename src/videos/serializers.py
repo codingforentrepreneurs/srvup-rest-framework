@@ -56,7 +56,6 @@ class VideoSerializer(serializers.HyperlinkedModelSerializer):
 		]
 
 
-
 class VideoViewSet(viewsets.ModelViewSet):
 	authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
 	permission_classes = [permissions.IsAuthenticated, ]
