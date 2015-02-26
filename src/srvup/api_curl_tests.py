@@ -49,6 +49,22 @@ curl -X POST -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/ap
 
 
 
+#API 2 with CBViews
+
+curl -X POST -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/api/comments/135/" http://127.0.0.1:8000/api2/projects/djangogap/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjUwMjExNjR9.3OtWG20Dx1hl4vSaznokkuW9fBee4MBYfM742b1G2vA"
+{"detail":"Method 'POST' not allowed."}
 
 
+curl -X DELETE -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/api/comments/135/" http://127.0.0.1:8000/api2/projects/djangogap/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjUwMjExNjR9.3OtWG20Dx1hl4vSaznokkuW9fBee4MBYfM742b1G2vA"
+{"detail":"Method 'DELETE' not allowed."}
+
+
+curl -X PUT -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/api/comments/135/" http://127.0.0.1:8000/api2/projects/djangogap/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjUwMjExNjR9.3OtWG20Dx1hl4vSaznokkuW9fBee4MBYfM742b1G2vA"
+{"detail":"Method 'PUT' not allowed."}
+
+curl http://127.0.0.1:8000/api2/projects/djangogap/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjUwMjExNjR9.3OtWG20Dx1hl4vSaznokkuW9fBee4MBYfM742b1G2vA"
+{"url":"http://127.0.0.1:8000/api2/projects/djangogap/","id":2,"slug":"djangogap","title":"DjangoGap","description":"","image":"http://127.0.0.1:8000/media/images/djangogap.png"}
+
+curl http://127.0.0.1:8000/api2/projects/djangogap/
+{"detail":"Authentication credentials were not provided."}
 
