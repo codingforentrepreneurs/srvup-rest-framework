@@ -42,16 +42,16 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
 			"url",
 			'id',
 			"children",
-			#"parent",
+			"parent",
 			"user",
-			# 'video',
+			'video',
 			'text',
 		]
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-	#authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
-	#permission_classes = [permissions.IsAuthenticated, ]
+	authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated, ]
 	queryset = Comment.objects.all()
 	serializer_class = CommentSerializer
 
