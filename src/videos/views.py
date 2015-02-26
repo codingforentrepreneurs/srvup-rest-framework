@@ -30,7 +30,23 @@ class CategoryListAPIView(generics.ListAPIView):
 	serializer_class = CategorySerializer
 	permission_classes = [permissions.IsAuthenticated, ]
 	paginate_by = 10
-	#pass
+
+	# def get_queryset(self):
+	#     user = self.request.user
+	#     return user.accounts.all()
+	# #pass
+
+class CategoryDetailAPIView(generics.RetrieveAPIView):
+	authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
+	permission_classes = [permissions.IsAuthenticated, ]
+
+	def get_object(self):
+		slug = self.kwargs["slug"]
+		obj = get_object_or_404(Category, slug=slug)
+		return obj
+
 
 
 #@login_required
