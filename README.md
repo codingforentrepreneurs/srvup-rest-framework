@@ -1,7 +1,7 @@
-Django Rest Framework & Srvup Membership
+Srvup & the Django Rest Framework
 =========
 
-Create an API by using a previously built Django project callled Srvu Membership ([github](https://github.com/codingforentrepreneurs/srvup-membership))
+Create an API by using a previously built Django project callled Srvup Membership ([github](https://github.com/codingforentrepreneurs/srvup-membership))
 
 
 Each Lecture Name is linked to the related source code.
