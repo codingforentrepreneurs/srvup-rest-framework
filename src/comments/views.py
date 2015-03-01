@@ -4,28 +4,18 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, HttpResponseRedirect, get_object_or_404
 
 # Create your views here.
+from rest_framework import generics, mixins
 
 from notifications.signals import notify
-
 from videos.models import Video
 
 from .models import Comment
 from .forms import CommentForm
-from .serializers import CommentSerializer
-
-from rest_framework import generics, mixins
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from .serializers import CommentCreateSerializer
 
 
-class CommentCreate(mixins.RetrieveModelMixin, generics.CreateAPIView):
-	#authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication, BasicAuthentication)
-	permission_classes = [IsAuthenticated, ]
-	queryset = Comment.objects.all()
-	serializer_class = CommentSerializer
-	#lookup_field = 'id'
-
-	# def get(self, request, *args, **kwargs):
-	# 	return self.retrieve(request, *args, **kwargs)
+class CommentCreateAPIView(generics.CreateAPIView):
+	serializer_class = CommentCreateSerializer
 
 
 

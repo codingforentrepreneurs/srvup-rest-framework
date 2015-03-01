@@ -14,6 +14,19 @@ from .models import  Comment
 
 User= get_user_model()
 
+
+class CommentCreateSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Comment
+		fields = [
+			'text',
+			'user',
+			'video',
+			]
+
+
+
+
 class ChildCommentSerializer(serializers.HyperlinkedModelSerializer):
 	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 	class Meta:
