@@ -24,34 +24,21 @@ class CategoryUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
 
 
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
-	url = CategoryUrlHyperlinkedIdentityField(view_name='category_detail_api')
-	class Meta:
-		model = Category
-		fields = [
-			"url",
-			'id',
-			'slug',
-			'title',
-			'description',
-			'image',
-		]
+"""
+category 
+	video
+		comment
 
-
-class CategoryViewSet(viewsets.ModelViewSet):
-	#authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
-	#permission_classes = [permissions.IsAuthenticated, ]
-	queryset = Category.objects.all()
-	serializer_class = CategorySerializer
+"""
 
 
 
 
 class VideoSerializer(serializers.HyperlinkedModelSerializer):
-	category = CategorySerializer(many=False, read_only=True)
-	comment_set = CommentSerializer(many=True, read_only=True)
-	#category_title = serializers.CharField(source='category.title', read_only=True)
-	#category_image = serializers.CharField(source='category.get_image_url', read_only=True)
+	#category = CategorySerializer(many=False, read_only=True)
+	#comment_set = CommentSerializer(many=True, read_only=True)
+	category_title = serializers.CharField(source='category.title', read_only=True)
+	category_image = serializers.CharField(source='category.get_image_url', read_only=True)
 	#category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
 	class Meta:
 		model = Video
@@ -64,9 +51,9 @@ class VideoSerializer(serializers.HyperlinkedModelSerializer):
 			'embed_code',
 			'share_message',
 			'timestamp',
-			"category",
-			#"category_image",
-			#"category_title",
+			#"category",
+			"category_image",
+			"category_title",
 			"comment_set",
 		]
 
@@ -76,3 +63,32 @@ class VideoViewSet(viewsets.ModelViewSet):
 	permission_classes = [permissions.IsAuthenticated, ]
 	queryset = Video.objects.all()
 	serializer_class = VideoSerializer
+
+
+
+#instance = Category.objects.get()
+#instance.video_set.all()
+
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
+	url = CategoryUrlHyperlinkedIdentityField(view_name='category_detail_api')
+	video_set = VideoSerializer(many=True)
+	class Meta:
+		model = Category
+		fields = [
+			"url",
+			'id',
+			'slug',
+			'title',
+			'description',
+			'image',
+			'video_set',
+		]
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+	#authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
+	#permission_classes = [permissions.IsAuthenticated, ]
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
+
+

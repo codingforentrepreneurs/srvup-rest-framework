@@ -76,8 +76,7 @@ class Video(models.Model):
 	category = models.ForeignKey("Category", default=1)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
-
-
+	
 	objects = VideoManager()
 
 	class Meta:

@@ -11,6 +11,22 @@ from videos.models import Video
 
 from .models import Comment
 from .forms import CommentForm
+from .serializers import CommentSerializer
+
+from rest_framework import generics, mixins
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+
+
+class CommentCreate(mixins.RetrieveModelMixin, generics.CreateAPIView):
+	#authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication, BasicAuthentication)
+	permission_classes = [IsAuthenticated, ]
+	queryset = Comment.objects.all()
+	serializer_class = CommentSerializer
+	#lookup_field = 'id'
+
+	# def get(self, request, *args, **kwargs):
+	# 	return self.retrieve(request, *args, **kwargs)
+
 
 
 @login_required
