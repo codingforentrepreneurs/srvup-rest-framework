@@ -41,3 +41,11 @@ Each Lecture Name is linked to the related source code.
 
 [Using Curl for CBVs API](../../tree/aa24599a859048d34359cdd4b2de58482272f4f3)
 
+[Enhance Category Detail](../../tree/f2ce2d2cc93605a44b83869108945d7841b2ec2d)
+
+[Video Detail](../../tree/4a3f5415bcf38ae79efb8a305df58209e3c71f6a)
+
+[CRUD With CBVs- Create View](../../tree/39aecaaf741c30e67545fdb01b2ff3b375cf48b9)
+
+[Comment Detail View](../../tree/c1d61af03f6af1a533e78c15f72771abe9880283)
+
