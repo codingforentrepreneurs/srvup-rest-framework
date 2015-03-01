@@ -11,34 +11,21 @@ from .models import  Category, Video
 
 #HyperlinkedIdentityField
 
-class CategoryUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
-	#lookup_field = 'slug'
-	#pass
-
+class VideoUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
 	def get_url(self, obj, view_name, request, format):
 		kwargs = {
-			'slug': obj.slug
+			'cat_slug': obj.category.slug,
+			"vid_slug": obj.slug
 		}
 		return reverse(view_name, kwargs=kwargs, request=request, format=format)
 
 
-
-
-"""
-category 
-	video
-		comment
-
-"""
-
-
-
-
 class VideoSerializer(serializers.HyperlinkedModelSerializer):
+	url = VideoUrlHyperlinkedIdentityField("video_detail_api")
 	#category = CategorySerializer(many=False, read_only=True)
 	#comment_set = CommentSerializer(many=True, read_only=True)
-	category_title = serializers.CharField(source='category.title', read_only=True)
-	category_image = serializers.CharField(source='category.get_image_url', read_only=True)
+	category_url = serializers.CharField(source='category.get_absolute_url', read_only=True)
+	#category_image = serializers.CharField(source='category.get_image_url', read_only=True)
 	#category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
 	class Meta:
 		model = Video
@@ -52,8 +39,8 @@ class VideoSerializer(serializers.HyperlinkedModelSerializer):
 			'share_message',
 			'timestamp',
 			#"category",
-			"category_image",
-			"category_title",
+			#"category_image",
+			"category_url",
 			"comment_set",
 		]
 
@@ -66,8 +53,14 @@ class VideoViewSet(viewsets.ModelViewSet):
 
 
 
-#instance = Category.objects.get()
-#instance.video_set.all()
+class CategoryUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
+	def get_url(self, obj, view_name, request, format):
+		kwargs = {
+			'slug': obj.slug
+		}
+		return reverse(view_name, kwargs=kwargs, request=request, format=format)
+
+
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
 	url = CategoryUrlHyperlinkedIdentityField(view_name='category_detail_api')

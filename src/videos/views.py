@@ -21,7 +21,19 @@ from comments.models import Comment
 
 
 from .models import Video, Category, TaggedItem
-from .serializers import CategorySerializer
+from .serializers import CategorySerializer, VideoSerializer
+
+
+class VideoDetailAPIView(generics.RetrieveAPIView):
+	queryset = Video.objects.all()
+	serializer_class = VideoSerializer
+
+	def get_object(self):
+		cat_slug = self.kwargs["cat_slug"]
+		vid_slug = self.kwargs["vid_slug"]
+		category = get_object_or_404(Category, slug=cat_slug)
+		obj = get_object_or_404(Video, category=category, slug=vid_slug)
+		return obj
 
 
 class CategoryListAPIView(generics.ListAPIView):
