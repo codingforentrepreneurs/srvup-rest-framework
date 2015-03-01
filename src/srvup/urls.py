@@ -9,8 +9,7 @@ from rest_framework import routers
 
 
 from comments.serializers import CommentViewSet
-from comments.views import CommentCreateAPIView
-
+from comments.views import CommentCreateAPIView, CommentDetailAPIView
 from videos.serializers import CategoryViewSet, VideoViewSet
 from videos.views import CategoryListAPIView, CategoryDetailAPIView, VideoDetailAPIView
 
@@ -24,6 +23,10 @@ urlpatterns = patterns('',
     url(r'^api2/comment/create/$',
         CommentCreateAPIView.as_view(),
         name='comment_create_api',
+        ),
+    url(r'^api2/comment/(?P<id>\d+)/$',
+        CommentDetailAPIView.as_view(),
+        name='comment_detail_api',
         ),
     url(r'^api2/projects/$', 
             CategoryListAPIView.as_view(), 

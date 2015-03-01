@@ -23,7 +23,7 @@ class VideoUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
 class VideoSerializer(serializers.HyperlinkedModelSerializer):
 	url = VideoUrlHyperlinkedIdentityField("video_detail_api")
 	#category = CategorySerializer(many=False, read_only=True)
-	#comment_set = CommentSerializer(many=True, read_only=True)
+	comment_set = CommentSerializer(many=True, read_only=True)
 	category_url = serializers.CharField(source='category.get_absolute_url', read_only=True)
 	#category_image = serializers.CharField(source='category.get_image_url', read_only=True)
 	#category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
@@ -53,17 +53,8 @@ class VideoViewSet(viewsets.ModelViewSet):
 
 
 
-class CategoryUrlHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
-	def get_url(self, obj, view_name, request, format):
-		kwargs = {
-			'slug': obj.slug
-		}
-		return reverse(view_name, kwargs=kwargs, request=request, format=format)
-
-
-
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
-	url = CategoryUrlHyperlinkedIdentityField(view_name='category_detail_api')
+	url = serializers.HyperlinkedIdentityField('category_detail_api', lookup_field='slug')
 	video_set = VideoSerializer(many=True)
 	class Meta:
 		model = Category
