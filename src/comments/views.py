@@ -11,17 +11,23 @@ from videos.models import Video
 
 from .models import Comment
 from .forms import CommentForm
-from .serializers import CommentCreateSerializer
+from .permissions import IsOwnerOrReadOnly
+from .serializers import CommentCreateSerializer, CommentUpdateSerializer
+
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
 	serializer_class = CommentCreateSerializer
 
 
-class CommentDetailAPIView(generics.RetrieveAPIView):
+class CommentDetailAPIView(mixins.UpdateModelMixin, generics.RetrieveAPIView):
 	queryset = Comment.objects.all()
-	serializer_class = CommentCreateSerializer
+	serializer_class = CommentUpdateSerializer
+	permission_classes = [IsOwnerOrReadOnly, ]
 	lookup_field = 'id'
+
+	def put(self, request, *args,**kwargs):
+		return self.update(request, *args, **kwargs)
 
 
 

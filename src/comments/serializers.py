@@ -15,6 +15,13 @@ from .models import  Comment
 User= get_user_model()
 
 
+class CommentUpdateSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Comment
+		fields = [
+			'text'
+		]
+
 class CommentCreateSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Comment
