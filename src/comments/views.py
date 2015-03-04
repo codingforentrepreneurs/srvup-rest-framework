@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, Http404, HttpResponseRedirect, get_object_or_404
 
 # Create your views here.
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, permissions
 
 from notifications.signals import notify
 from videos.models import Video
@@ -12,7 +12,17 @@ from videos.models import Video
 from .models import Comment
 from .forms import CommentForm
 from .permissions import IsOwnerOrReadOnly
-from .serializers import CommentCreateSerializer, CommentUpdateSerializer
+from .serializers import CommentCreateSerializer, CommentUpdateSerializer, CommentSerializer
+
+
+
+class CommentListAPIView(generics.ListAPIView):
+	#authentication_classes = [SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication]
+	queryset = Comment.objects.all()
+	serializer_class = CommentSerializer
+	permission_classes = [permissions.IsAuthenticated, ]
+	paginate_by = 10
+
 
 
 

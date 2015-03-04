@@ -16,9 +16,12 @@ User= get_user_model()
 
 
 class CommentUpdateSerializer(serializers.ModelSerializer):
+	user = serializers.CharField(source='user.username', read_only=True)
 	class Meta:
 		model = Comment
 		fields = [
+			"id",
+			"user",
 			'text'
 		]
 
@@ -35,7 +38,8 @@ class CommentCreateSerializer(serializers.ModelSerializer):
 
 
 class ChildCommentSerializer(serializers.HyperlinkedModelSerializer):
-	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+	#user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+	user = serializers.CharField(source='user.username', read_only=True)
 	class Meta:
 		model = Comment
 		fields = [
@@ -47,7 +51,8 @@ class ChildCommentSerializer(serializers.HyperlinkedModelSerializer):
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
 	url = serializers.HyperlinkedIdentityField("comment_detail_api", lookup_field='id')
-	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+	#user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+	user = serializers.CharField(source='user.username', read_only=True)
 	children = serializers.SerializerMethodField(read_only=True)
 
 	def get_children(self, instance):
@@ -63,7 +68,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
 			"url",
 			'id',
 			"children",
-			"parent",
+			#"parent",
 			"user",
 			'video',
 			'text',
