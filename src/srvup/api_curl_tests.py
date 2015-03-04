@@ -51,7 +51,7 @@ curl -X POST -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/ap
 
 #API 2 with CBViews
 
-curl -X POST -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/api/comments/135/" http://127.0.0.1:8000/api2/projects/djangogap/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjUwMjExNjR9.3OtWG20Dx1hl4vSaznokkuW9fBee4MBYfM742b1G2vA"
+curl -X POST -d "text='NEW CHILD COMMENT'&user=1&parent=http://127.0.0.1:8000/api2/comment/135/" http://127.0.0.1:8000/api2/comment/133/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjUwMjExNjR9.3OtWG20Dx1hl4vSaznokkuW9fBee4MBYfM742b1G2vA"
 {"detail":"Method 'POST' not allowed."}
 
 
@@ -67,4 +67,23 @@ curl http://127.0.0.1:8000/api2/projects/djangogap/ -H "Authorization: JWT eyJhb
 
 curl http://127.0.0.1:8000/api2/projects/djangogap/
 {"detail":"Authentication credentials were not provided."}
+
+
+curl -X PUT -d "text=YET ANOTHER AWESOME NEW COMMENT" http://127.0.0.1:8000/api2/comment/135/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+{"id":135,"user":"jmitchel3","text":"'YET ANOTHER AWESOME NEW COMMENT'"}
+
+
+curl -X DELETE http://127.0.0.1:8000/api2/comment/143/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+{"detail":"You do not have permission to perform this action."}
+
+curl -X DELETE http://127.0.0.1:8000/api2/comment/142/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+#returned 204
+
+
+curl -X POST -d "text='NEW COMMENT'&user=1&parent=146" http://127.0.0.1:8000/api2/comment/create/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+{"text":"'NEW COMMENT'","user":1,"video":null,"parent":146}
+
+
+curl -X PUT -d "text=YET ANOTHER AWESOME NEW COMMENT" http://127.0.0.1:8000/api2/comment/147/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+
 
