@@ -86,4 +86,11 @@ curl -X POST -d "text='NEW COMMENT'&user=1&parent=146" http://127.0.0.1:8000/api
 
 curl -X PUT -d "text=YET ANOTHER AWESOME NEW COMMENT" http://127.0.0.1:8000/api2/comment/147/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
 
+curl -X DELETE http://127.0.0.1:8000/api2/comment/147/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+
+
+curl -X POST -d "text=YEAHH IT's working&user=1&video=23" http://127.0.0.1:8000/api2/comment/create/ -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MjU0NTc1ODV9.5aA5mTmyuoMI0BhMYPL03qI-vwnE-pSzWe-14yDMnS8"
+
+
+
 
