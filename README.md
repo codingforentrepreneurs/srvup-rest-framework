@@ -49,3 +49,16 @@ Each Lecture Name is linked to the related source code.
 
 [Comment Detail View](../../tree/c1d61af03f6af1a533e78c15f72771abe9880283)
 
+[Comment Update Mixin](../../tree/aa6c32d99ae055674898f79b6b080ad0f1eb4e4d)
+
+[Comment List & Detail](../../tree/7b3c6b7e249548f9653fd579dc40ab12ad037317)
+
+[Delete Comment Mixin & CRUD for Child Comments](../../tree/e18f7f74dc55b1c50acb31676bf66aff8fa67671)
+
+[Video Hyper Link Field for API 2](../../tree/149ae2d6f032ca95b7f487b8815f130eb96f4068)
+
+
+
+
+
+
