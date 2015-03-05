@@ -7,5 +7,5 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 			return True
 
 		#if request.user.is_member == False:
-			return False
+		#	return False
 		return obj.user == request.user #true/false
