@@ -21,12 +21,15 @@ from comments.models import Comment
 
 
 from .models import Video, Category, TaggedItem
+from .permissions import IsMember
 from .serializers import CategorySerializer, VideoSerializer
 
 
 class VideoDetailAPIView(generics.RetrieveAPIView):
 	queryset = Video.objects.all()
 	serializer_class = VideoSerializer
+	permission_classes = [IsMember]
+	#add permission for membership & free preview on obj
 
 	def get_object(self):
 		cat_slug = self.kwargs["cat_slug"]
