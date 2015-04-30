@@ -20,3 +20,6 @@ Suggested way for mac users:
 
 
 "->" denotes terminal commands. 
+
+
+joincfe.com/suggest

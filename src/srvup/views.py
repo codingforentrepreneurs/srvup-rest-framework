@@ -18,6 +18,11 @@ from comments.models import Comment
 from videos.models import Video, Category
 
 
+def jquery_test_view(request):
+
+	return render(request, "jquery_test/view_temp.html", {})
+
+
 
 @api_view(["GET"])
 def api_home_abc(request):
