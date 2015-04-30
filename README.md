@@ -57,7 +57,7 @@ Each Lecture Name is linked to the related source code.
 
 [Video Hyper Link Field for API 2](../../tree/149ae2d6f032ca95b7f487b8815f130eb96f4068)
 
-
+[jQuery Test *start*](../../tree/c5ea6adf43e0599b6f0a95e19e3953cfa81b0e3d)
 
 
 
