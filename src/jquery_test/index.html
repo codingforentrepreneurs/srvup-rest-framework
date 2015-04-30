@@ -16,22 +16,56 @@
 	Hello
 </button>
 
-<div id='itemContainer'>
+<div id='itemContainer' style='color:red;'>
 
 </div>
+
+
+<!-- curl -X POST -d "text='NEW COMMENT'&user=1&parent=146" http://127.0.0.1:8000/api2/comment/create/ -->
 </div>
+
+
+
 <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#ajaxBtn").click(function(){
 			$("#itemContainer").html("<h1>Hi</h1>");
+
+        //      $.ajax({
+        //       type: "POST",
+        //       url: "http://127.0.0.1:8000/api/auth/token/",
+        //       data: {
+        //         // 
+        //         "username": "jmitchel3",
+        //         "password": 123
+        //       },
+        //       success: function(data){
+        //         $("#itemContainer").html(data.token);
+        //        console.log(data);
+        //       },
+        //       error: function(data){
+        //         console.log(data);
+        //       },
+        //    });
+        // });
+
+
+
 			 $.ajax({
-              type: "GET",
-              url: "http://127.0.0.1:8000/api2/",
+              type: "POST",
+              headers: {
+                "Authorization": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImptaXRjaGVsMyIsInVzZXJfaWQiOjEsImVtYWlsIjoiY29kaW5nZm9yZW50cmVwcmVuZXVyc0BnbWFpbC5jb20iLCJleHAiOjE0MzAzODQ0OTJ9.eB8iSYUkrIzJZTcWUml4mYOs5E6tOZIR_se3EWyNqPA"
+              },
+              url: "http://127.0.0.1:8000/api2/comment/create/",
               data: {
                 // 
+                "text": "A another comment random comment",
+                "user": 1,
+                "video": 23
               },
               success: function(data){
+                $("#itemContainer").html(data.text);
               	console.log(data);
               },
               error: function(data){
