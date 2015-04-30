@@ -59,6 +59,8 @@ Each Lecture Name is linked to the related source code.
 
 [jQuery Test *start*](../../tree/c5ea6adf43e0599b6f0a95e19e3953cfa81b0e3d)
 
+[jQuery Test Part 1](../../tree/771a723712b6a7024463588bc2eb34c84067ad23)
 
+[jQuery Test Part 2](../../tree/9c35f90b156d85fefdedd013cc3d58065c433d46)
 
 
