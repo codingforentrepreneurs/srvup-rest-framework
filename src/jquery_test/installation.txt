@@ -1,0 +1,22 @@
+For http test server. This is only if you need to test a raw HTML 
+index file as a test server. The goal here is to install the node  
+& javascript package manager to get the package "http-server" in 
+order to emmulate a server so ajax requests work in a local 
+testing environment.
+
+
+Quick way for all: https://www.npmjs.com/package/npm
+
+
+Suggested way for mac users:
+
+1. Install homebrew via http://brew.sh/
+-> ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+2. Install Node.js and the Javascript Package Manager (npm) via homebrew:
+-> sudo brew install npm 
+*note: need computer admin rights for "sudo"
+3. Install "http-server" via npm.
+-> sudo npm install http-server -g
+
+
+"->" denotes terminal commands. 

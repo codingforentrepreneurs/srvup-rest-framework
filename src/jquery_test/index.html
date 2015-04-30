@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional bootstrap theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<title>Testing with jQuery</title>
+</head>
+<body>
+
+<div class='col-sm-6 col-sm-offset-3'>
+<h1>Testing with jQuery</h1>
+<button class='btn btn-default' id='ajaxBtn'>
+	Hello
+</button>
+
+<div id='itemContainer'>
+
+</div>
+</div>
+<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#ajaxBtn").click(function(){
+			$("#itemContainer").html("<h1>Hi</h1>");
+			 $.ajax({
+              type: "GET",
+              url: "http://127.0.0.1:8000/api2/",
+              data: {
+                // 
+              },
+              success: function(data){
+              	console.log(data);
+              },
+              error: function(data){
+                console.log(data);
+              },
+           });
+        });
+
+	});
+</script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
