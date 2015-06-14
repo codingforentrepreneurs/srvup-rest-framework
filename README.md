@@ -63,5 +63,5 @@ Each Lecture Name is linked to the related source code.
 
 [jQuery Test Part 2 *end*](../../tree/9c35f90b156d85fefdedd013cc3d58065c433d46)
 
-
+[Final Code Django 1.7](../../tree/9c35f90b156d85fefdedd013cc3d58065c433d46)
 
