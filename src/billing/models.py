@@ -25,8 +25,8 @@ user_logged_in.connect(user_logged_in_receiver)
 
 class Membership(models.Model):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL)
-	date_end = models.DateTimeField(default=timezone.now(), verbose_name='End Date')
-	date_start = models.DateTimeField(default=timezone.now(), verbose_name='Start Date')
+	date_end = models.DateTimeField(default=timezone.now, verbose_name='End Date')
+	date_start = models.DateTimeField(default=timezone.now, verbose_name='Start Date')
 
 	def __unicode__(self):
 		return str(self.user.username)

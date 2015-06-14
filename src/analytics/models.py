@@ -44,7 +44,7 @@ class PageView(models.Model):
 	secondary_object_id = models.PositiveIntegerField(null=True, blank=True)
 	secondary_object = GenericForeignKey("secondary_content_type", "secondary_object_id")
 
-	timestamp = models.DateTimeField(default=timezone.now())
+	timestamp = models.DateTimeField(default=timezone.now)
 
 	objects = PageViewManager()
 
