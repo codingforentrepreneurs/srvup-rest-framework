@@ -52,11 +52,14 @@ class CommentUpdateSerializer(serializers.ModelSerializer):
 		]
 
 class CommentCreateSerializer(serializers.ModelSerializer):
+	username = serializers.CharField(source='user.username', read_only=True)
 	class Meta:
 		model = Comment
 		fields = [
+			'id'
 			'text',
 			'user',
+			'username'
 			'video',
 			'parent',
 			]
